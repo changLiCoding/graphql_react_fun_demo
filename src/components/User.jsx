@@ -5,7 +5,7 @@ import { Button } from "antd";
 import Posts from "./Posts";
 const GET_USER = gql`
 	query User($id: ID!) {
-		user(id: $id) {
+		userById(id: $id) {
 			id
 			name
 			email
@@ -49,7 +49,7 @@ function User({ selectUser, user }) {
 				</div>
 				<div className='pox-4 flex-1 w-full'>
 					<Posts
-						posts={data.user.posts}
+						posts={data.userById.posts}
 						user={user}
 					/>
 				</div>
