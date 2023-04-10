@@ -1,12 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import {
-	ApolloClient,
-	InMemoryCache,
-	ApolloProvider,
-	gql,
-} from "@apollo/client";
+import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
 import "./index.css";
 
@@ -15,23 +10,9 @@ import "./index.css";
 // 	cache: new InMemoryCache(),
 // });
 const client = new ApolloClient({
-	uri: "http://127.0.0.1:3000/graphiql",
+	uri: "http://localhost:3000/graphql",
 	cache: new InMemoryCache(),
 });
-
-client
-	.query({
-		query: gql`
-			query {
-				users {
-					id
-					name
-					email
-				}
-			}
-		`,
-	})
-	.then((result) => console.log(result));
 
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<React.StrictMode>
