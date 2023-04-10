@@ -19,13 +19,12 @@ export default function Users({ selectUser }) {
 	if (error) return <p>Error :( Because: {error.message}</p>;
 	console.log(data.users);
 	return (
-		<div className='container flex flex-wrap intems-center pb-16'>
+		<div className='container flex max-w-2xl min-w-fit flex-row flex-wrap intems-center pb-16'>
 			{data.users.map((user) => (
 				<div
 					key={user.id}
-					className='lg:w-1/3 w-full p-4 text-center inline'
-					// onClick={selectUser.bind(this, user.id)}
-				>
+					className='lg:w-1/3 p-4 text-center inline hover:scale-105  bg-gray-400 rounded-full'
+					onClick={() => selectUser(user)}>
 					<UserAvatar user={user} />
 				</div>
 			))}
