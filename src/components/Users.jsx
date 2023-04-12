@@ -13,41 +13,21 @@ export default function Users({ selectUser }) {
 			}
 		}
 	`;
-	const NEW_USER_SUBSCRIPTION = gql`
-		subscription onUser {
-			user {
-				id
-				name
-				email
-				postsCount
-			}
-		}
-	`;
 
 	const {
 		loading: queryLoading,
 		error: queryError,
 		data: queryData,
+		refetch,
 	} = useQuery(GET_USERS);
 
-	const { data: subData, error: subError } = useSubscription(
-		NEW_USER_SUBSCRIPTION,
-		{
-			onData: ({ subscriptionData }) => {
-				console.log(subscriptionData);
-			},
-		}
-	);
-
 	if (queryLoading) return <p>Loading...</p>;
-	if (queryError) return <p>Error :( Because: {error.message}</p>;
-
-	console.log(subData);
+	if (queryError) return <p>Error :( Because: {queryError.message}</p>;
 
 	return (
 		<div className='container flex max-w-2xl min-w-fit flex-row flex-wrap intems-center pb-16'>
 			<div className='lg:m-4 lg:w-1/4 w-full rounded shadow-lg'>
-				<CreateUser />
+				<CreateUser refetch={refetch} />
 			</div>
 			{queryData?.users?.map((user) => (
 				<div
@@ -57,14 +37,6 @@ export default function Users({ selectUser }) {
 					<UserAvatar user={user} />
 				</div>
 			))}
-			{subData?.user && (
-				<div
-					key={subData.user.id}
-					className='lg:w-1/3 p-4 text-center inline hover:scale-105  bg-gray-400 rounded-full'
-					onClick={() => selectUser(subData.user)}>
-					<UserAvatar user={subData.user} />
-				</div>
-			)}
 		</div>
 	);
 }

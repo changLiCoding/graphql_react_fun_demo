@@ -14,16 +14,17 @@ const CREATE_USER = gql`
 		}
 	}
 `;
-function CreateUser() {
+function CreateUser({ refetch }) {
 	const [createUser, { data, loading, error }] = useMutation(CREATE_USER);
 
 	const [state, setState] = useState({
 		name: "",
 		email: "",
 	});
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		createUser({ variables: { name: state.name, email: state.email } });
+		await createUser({ variables: { name: state.name, email: state.email } });
+		refetch();
 	};
 	console.log(data);
 	return (
