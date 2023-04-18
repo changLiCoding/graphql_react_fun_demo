@@ -24,11 +24,11 @@ function CreateUser({ refetch }) {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		await createUser({ variables: { name: state.name, email: state.email } });
+		console.log(data);
 		refetch();
 	};
-	console.log(data);
 	return (
-		<div className='lg:fixed bottom-0 left-0 w-full border-t border-gray-300'>
+		<div className='w-full border-t border-gray-300'>
 			<form
 				className='lg:px-8 pt-2 pb-2'
 				onSubmit={handleSubmit}>

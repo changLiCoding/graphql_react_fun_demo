@@ -26,7 +26,7 @@ export default function Users({ selectUser }) {
 
 	return (
 		<div className='container flex max-w-2xl min-w-fit flex-row flex-wrap intems-center pb-16'>
-			<div className='lg:m-4 lg:w-1/4 w-full rounded shadow-lg'>
+			<div className=' lg:w-1/3 p-4 text-center inline hover:scale-105  bg-gray-400 rounded-full'>
 				<CreateUser refetch={refetch} />
 			</div>
 			{queryData?.users?.map((user) => (

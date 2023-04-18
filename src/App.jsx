@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Route, Routes } from "react-router-dom";
+
 import NavBar from "./components/NavBar";
 import Home from "./components/Home";
 import Users from "./components/Users";
@@ -9,15 +11,25 @@ function App() {
 	return (
 		<div className='container mx-auto px-4'>
 			<NavBar></NavBar>
-			{/* <Home /> */}
-			{user ? (
-				<User
-					user={user}
-					selectUser={setUser}
+			<Routes>
+				<Route
+					path='/'
+					element={<Home />}
 				/>
-			) : (
-				<Users selectUser={setUser} />
-			)}
+				<Route
+					path='users'
+					element={
+						user ? (
+							<User
+								user={user}
+								selectUser={setUser}
+							/>
+						) : (
+							<Users selectUser={setUser} />
+						)
+					}
+				/>
+			</Routes>
 		</div>
 	);
 }
